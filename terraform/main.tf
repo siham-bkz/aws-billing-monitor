@@ -23,7 +23,7 @@ resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
   metric_name               = "EstimatedCharges"
   namespace                 = "AWS/Billing"
   period                    = "21600"
-  statistic                 = "maximum"
+  statistic                 = "Maximum"
   threshold                 = 50
   alarm_actions = [aws_sns_topic.aws_billing.arn]
 
