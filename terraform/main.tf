@@ -6,7 +6,7 @@ resource "aws_sns_topic" "aws_billing" {
 resource "aws_sns_topic_subscription" "billing_email" {
   topic_arn = aws_sns_topic.aws_billing.arn
   protocol  = "email"
-  endpoint  = "boukhobza.siham22@gmail.com"  # Your email
+  endpoint  = var.email_alert # Your email
   
   # Wait for email confirmation
   confirmation_timeout_in_minutes = 10
@@ -24,7 +24,7 @@ resource "aws_cloudwatch_metric_alarm" "billing_alarm" {
   namespace                 = "AWS/Billing"
   period                    = "21600"
   statistic                 = "Maximum"
-  threshold                 = 50
+  threshold                 = var.billing_threshold
   alarm_actions = [aws_sns_topic.aws_billing.arn]
 
   dimensions = {
